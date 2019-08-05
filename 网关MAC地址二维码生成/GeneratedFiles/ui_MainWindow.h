@@ -15,7 +15,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,37 +29,34 @@ public:
     QLabel *labelMAC;
     QPushButton *btnSave;
     QLabel *labelResult;
-    QToolBar *mainToolBar;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QString::fromUtf8("MainWindowClass"));
+        MainWindowClass->setEnabled(true);
         MainWindowClass->resize(300, 480);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         editMAC = new QLineEdit(centralWidget);
         editMAC->setObjectName(QString::fromUtf8("editMAC"));
-        editMAC->setGeometry(QRect(25, 310, 250, 30));
+        editMAC->setGeometry(QRect(25, 325, 250, 30));
         labelImage = new QLabel(centralWidget);
         labelImage->setObjectName(QString::fromUtf8("labelImage"));
-        labelImage->setGeometry(QRect(25, 10, 250, 250));
+        labelImage->setGeometry(QRect(25, 25, 250, 250));
         btnGenerate = new QPushButton(centralWidget);
         btnGenerate->setObjectName(QString::fromUtf8("btnGenerate"));
-        btnGenerate->setGeometry(QRect(30, 350, 100, 40));
+        btnGenerate->setGeometry(QRect(30, 365, 100, 40));
         labelMAC = new QLabel(centralWidget);
         labelMAC->setObjectName(QString::fromUtf8("labelMAC"));
-        labelMAC->setGeometry(QRect(25, 270, 250, 30));
+        labelMAC->setGeometry(QRect(25, 275, 250, 30));
         btnSave = new QPushButton(centralWidget);
         btnSave->setObjectName(QString::fromUtf8("btnSave"));
-        btnSave->setGeometry(QRect(170, 350, 100, 40));
+        btnSave->setGeometry(QRect(170, 365, 100, 40));
         labelResult = new QLabel(centralWidget);
         labelResult->setObjectName(QString::fromUtf8("labelResult"));
-        labelResult->setGeometry(QRect(25, 400, 250, 60));
+        labelResult->setGeometry(QRect(25, 415, 250, 60));
         MainWindowClass->setCentralWidget(centralWidget);
-        mainToolBar = new QToolBar(MainWindowClass);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MainWindowClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
 
         retranslateUi(MainWindowClass);
 

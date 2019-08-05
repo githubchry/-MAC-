@@ -11,22 +11,27 @@ MainWindow::MainWindow(QWidget *parent)
 	qrArg.qrcodeBuffer = (uint8_t*)calloc(1, qrcodegen_BUFFER_LEN_MAX * sizeof(uint8_t));
 	qrArg.tempBuffer = (uint8_t*)calloc(1, qrcodegen_BUFFER_LEN_MAX * sizeof(uint8_t));
 
-	QFont ft;
-	ft.setPointSize(15);
-	ui.labelMAC->setFont(ft);
+	QFont ft("Microsoft YaHei", 15);
 	ui.editMAC->setFont(ft);
 	ui.editMAC->setAlignment(Qt::AlignCenter);
-	ui.labelMAC->setAlignment(Qt::AlignCenter);
+
+	ft.setBold(QFont::Bold);
+	ui.labelMAC->setFont(ft);
+	ui.labelMAC->setAlignment(Qt::AlignHCenter | Qt::AlignBottom);
 
 	QPalette palette;
-	palette.setColor(QPalette::Background, QColor(0, 0, 0));
+	palette.setColor(QPalette::Background, QColor(255, 255, 255));
 	ui.labelImage->setAutoFillBackground(true);
 	ui.labelImage->setPalette(palette);
+	ui.labelMAC->setAutoFillBackground(true);
+	ui.labelMAC->setPalette(palette);
 
 
 	palette.setColor(QPalette::WindowText, Qt::red);
 	ui.labelResult->setPalette(palette);
+	//鼠标可选
 	ui.labelResult->setTextInteractionFlags(Qt::TextSelectableByMouse);
+	//自动换行
 	ui.labelResult->setWordWrap(true);
 	ui.labelResult->setAlignment(Qt::AlignTop);
 }
@@ -43,6 +48,7 @@ void MainWindow::on_btnGenerate_clicked()
 	{
 		return;
 	}
+	//去掉mac地址里面的冒号和空格
 	rawMAC = ui.editMAC->text();
 	fatMAC = rawMAC.remove(":").remove(" ").toUpper();
 
@@ -92,8 +98,10 @@ void MainWindow::on_btnSave_clicked()
 
 	char file_name[256] = { 0 };
 	sprintf(file_name, "%s.jpg", fatMAC.toLocal8Bit().data());
-	qrcodeImg->save(file_name, "jpg", 100);
+	//qrcodeImg->save(file_name, "jpg", 100);
+	QPixmap p = this->grab(QRect(25, 25, 250, 280));
+	p.save(file_name, "jpg", 100);
+
 	QString currentPath = QCoreApplication::applicationDirPath();
 	ui.labelResult->setText(currentPath + '/' + file_name);
-
 }
